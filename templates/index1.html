@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Grammar Checker</title>
+  <script>
+    function copyText(button) {
+      var text = document.getElementById("output").innerText;
+      navigator.clipboard.writeText(text).then(function() {
+         button.innerText = "Copied";
+      })
+ 
+    }
+  </script>
+  <style>
+    body {
+      background-color: #f2f2f2;
+      color: #333;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    #header {
+      background-color: #4258c9;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+    #container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+    }
+    #input-form {
+      flex: 1;
+      padding: 20px;
+      height: 400px;
+      background-color: #fff;
+      border-right: 1px solid #ddd;
+    }
+    #output {
+      flex: 1;
+      padding: 20px;
+    
+    }
+    input[type="text"] {
+      width: 100%;
+      color: #2b2a2a;
+      font-size: 20px;
+      margin-top: 10px;
+      height: 340px;
+    
+      box-sizing: border-box;
+      margin-bottom: -10px;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+    }
+    input[type="submit"] {
+      background-color: #4258c9;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    input[type="submit"]:hover {
+      background-color: #21317e;
+    }
+   
+    h1 {
+      margin: 0;
+      font-size: 36px;
+      font-weight: normal;
+    }
+    h2 {
+      margin: 0;
+      margin-top: 5px;
+      font-size: 24px;
+      font-weight: normal;
+      margin-top: -210px;
+    }
+    p {
+      margin: 0;
+      margin-top: 20px;
+      font-size: 18px;
+      line-height: 1.5;
+    }
+    /* Position the button in the bottom right corner */
+  .copy-btn {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    background-color: #4258c9;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  #copy-btn:hover {
+    background-color: #21317e;
+  }
+   
+   
+  </style>
+</head>
+<body>
+  <div id="header">
+    <h1>WordPlay - Grammar Checker</h1>
+  </div>
+  <div id="container">
+    <div id="input-form">
+      <form method="POST" action="/correct">
+        <label for="input_sentence">Enter a sentence:</label>
+        <br>
+        <input type="text" name="input_sentence" id="input_sentence">
+        <br>
+        <br>
+        <input type="submit" value="Check">
+      </form>
+    </div>
+    <div id="output">
+      {% if corrected_text %}
+      <h2>Corrected:</h2>
+      <p>{{ corrected_text }}</p>
+
+        <button class="copy-btn" onclick="copyText(this)">Copy</button>
+           
+      {% endif %}
+    </div>
+  </div>
+</body>
+</html>
